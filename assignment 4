@@ -1,0 +1,380 @@
+11/12 Assignment
+
+Monday, November 5, 2018
+2:57 PM
+
+1. Write an efficient program to find the sum of contiguous subarray within a one-dimensional array of numbers which has the largest sum. DONE
+O(n) as we are iterating the array containing n elements only once.
+
+
+
+ Loop through and pull out first currentMax positive number as you run through the loop. Continue and track the max Sum. Each time we have a positive sum compare back to maxSum and update currentMax if it is greater then original maxSum  
+Loop start counting at positive numbers because we are looking for the largest sum  
+Maximum contiguous sum is 7
+ 
+PYTHON
+def maxSubArraySum(a,size): 
+      
+    max_so_far =a[0] 
+    curr_max = a[0] 
+      
+    for i in range(1,size): 
+        curr_max = max(a[i], curr_max + a[i]) 
+        max_so_far = max(max_so_far,curr_max) 
+          
+    return max_so_far 
+  
+# Driver function to check the above function  
+a = [-2, -3, 4, -1, -2, 1, 5, -3] 
+print"Maximum contiguous sum is" , maxSubArraySum(a,len(a)) 
+
+From <https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/> 
+
+
+JAVASCRIPT
+Math.max() function returns the largest of zero or more numbers 
+
+
+  
+2. You are given a list of n-1 integers and these integers are in the range of 1 to n. There are no duplicates in list. One of the integers is missing in the list. Write an efficient code to find the missing integer. DONE
+
+Loop through the list to find the missing number
+use a loop to store sum  and save it in any variable let us call it sum.
+The value of variable sum is your answer!
+1. Get the sum of numbers 
+       total = n*(n+1)/2
+2  Subtract all the numbers from sum and
+   you will get the missing number.
+
+# getMissingNo takes list as argument 
+def getMissingNo(A): 
+    n = len(A) 
+    total = (n+1)*(n+2)/2
+    sum_of_A = sum(A) 
+    return total - sum_of_A 
+  
+# Driver program to test above function 
+A = [1, 2, 4, 5, 6] 
+miss = getMissingNo(A) 
+print(miss) 
+
+From <https://www.geeksforgeeks.org/find-the-missing-number/> 
+
+            
+3. Given an unsorted array of nonnegative integers, find a continuous subarray which adds to a given number.
+ 
+A simple solution is to consider all subarrays one by one and check the sum of every subarray. Following program implements the simple solution. We run two loops: the outer loop picks a starting point i and the inner loop tries all subarrays starting from i.
+Time Complexity : O(n^2) in worst case.
+ 
+*** FIX
+
+def maxSubArraySum(size): 
+      
+    max_so_far =[0] 
+    curr_max = [0] 
+      
+    for i in range(size): 
+        curr_max = max_so_far + [i] 
+        if (max_so_far < 0) curr_max = 0
+       if (max_so_far <  curr_max)
+            
+           max_so_far = curr_max
+
+          
+    return max_so_far 
+
+ Examples :
+Input: arr[] = {1, 4, 20, 3, 10, 5}, sum = 33
+Ouptut: Sum found between indexes 2 and 4
+ 
+Input: arr[] = {1, 4, 0, 0, 3, 10, 5}, sum = 7
+Ouptut: Sum found between indexes 1 and 4
+ 
+Input: arr[] = {1, 4}, sum = 0
+Output: No subarray found
+ 
+4. Given an unsorted array of integers, find a subarray which adds to a given number. If there are more than one subarrays with sum as the given number, print any of them. DONE
+Examples:
+Input: arr[] = {1, 4, 20, 3, 10, 5}, sum = 33
+Ouptut: Sum found between indexes 2 and 4
+Input: arr[] = {10, 2, -2, -20, 10}, sum = -10
+Ouptut: Sum found between indexes 0 to 3
+Input: arr[] = {-10, 0, 2, -2, -20, 10}, sum = 20
+Ouptut: No subarray with given sum exists
+Maintain sum of elements encountered so far in a variable (say curr_sum). Let the given number is sum. Now for each element, we check if curr_sum – sum exists in the map or not. If we found it in the map that means, we have a subarray present with given sum, else we insert curr_sum into the map and proceed to next element. If all elements of the array are processed and we didn’t find any subarray with given sum, then subarray doesn’t exists.
+Time Complexity – O(n)
+ 
+# Returns true if the  
+# there is a subarray  
+# of arr[] with sum 
+# equal to 'sum'  
+# otherwise returns  
+# false. Also, prints  
+# the result. 
+def subArraySum(arr, n, sum): 
+      
+    # Initialize curr_sum as 
+    # value of first element 
+    # and starting point as 0  
+    curr_sum = arr[0] 
+    start = 0
+  
+    # Add elements one by   # one to curr_sum and   # if the curr_sum exceeds  the sum, then remove  
+    starting element  
+    i = 1
+    while i <= n: 
+          
+        # If curr_sum exceeds 
+        # the sum, then remove 
+        # the starting elements 
+        while curr_sum > sum and start < i-1: 
+          
+            curr_sum = curr_sum - arr[start] 
+            start += 1
+              
+        # If curr_sum becomes 
+        # equal to sum, then 
+        # return true 
+        if curr_sum == sum: 
+            print ("Sum found between indexes") 
+            print ("%d and %d"%(start, i-1)) 
+            return 1
+  
+        # Add this element  
+        # to curr_sum 
+        if i < n: 
+            curr_sum = curr_sum + arr[i] 
+        i += 1
+  
+    # If we reach here,  
+    # then no subarray 
+    print ("No subarray found") 
+    return 0
+ 
+
+5. Write a program to sort an array of 0's,1's and 2's in ascending order. DONE
+
+
+Def count 012 (arr, n)
+	Count0= 0
+	Count1 = 1
+	Count 2=2 2
+	
+	For i in range (arr, n)
+		If (arr [i] == o)
+		Count 0 =  count 0 + 1
+		
+		If (arr[i] == 1)
+		Count 1 =  count 1 + 1
+		
+		If arr [i] ==2
+		Count 2 = count 2 + 1
+	
+	For I in range (0, count 0)
+		Arr [i] = 0
+	For I in range (count 0, (count 0 + count 1))
+		Arr [i] = 1
+	For I in range( (count 0 + count 1) , n)
+		Arr [i] = 2
+		
+	return
+		
+		
+	
+
+6. Equilibrium index of an array is an index such that the sum of elements at lower indexes is equal to the sum of elements at higher indexes. For example, in an array A:
+Example :
+Input : A[] = {-7, 1, 5, 2, -4, 3, 0}
+Output : 3
+3 is an equilibrium index, because:
+A[0] + A[1] + A[2]  =  A[4] + A[5] + A[6]
+1) Initialize leftsum as 0 2) Get the total sum of the array as sum 3) Iterate through the array and for each index i, do following. a) Update sum to get the right sum. sum = sum - arr[i] // sum is now right sum b) If leftsum is equal to sum, then return current index. c) leftsum = leftsum + arr[i] // update leftsum for next iteration. 4) return -1 // If we come out of loop without returning then // there is no equilibrium index
+
+From <https://www.geeksforgeeks.org/equilibrium-index-of-an-array/> 
+
+
+# index of an array # function to find the equilibrium index 
+def equilibrium(arr): 
+  
+    # finding the sum of whole array 
+    total_sum = sum(arr) 
+    leftsum = 0
+    for i, num in enumerate(arr): 
+          
+        # total_sum is now right sum 
+        # for index i 
+        total_sum -= num 
+          
+        if leftsum == total_sum: 
+            return i 
+        leftsum += num 
+       
+      # If no equilibrium index found,  
+      # then return -1 
+  
+  return -1
+      
+# Driver code 
+arr = [-7, 1, 5, 2, -4, 3, 0] 
+print ('First equilibrium index is ', 
+      equilibrium(arr)) 
+ Output:
+First equilibrium index is 3
+Time Complexity: O(n)
+
+7. Write a program to print all the LEADERS in the array. An element is leader if it is greater than all the elements to its right side. And the rightmost element is always a leader. For example int the array {16, 17, 4, 3, 5, 2}, leaders are 17, 5 and 2.
+
+Use two loops. The outer loop runs from 0 to size – 1 and one by one picks all elements from left to right. The inner loop compares the picked element to all the elements to its right side. If the picked element is greater than all the elements to its right side, then the picked element is the leader.
+ 
+Time Complexity: O(n*n)
+def printLeaders(arr,size): 
+      
+    for i in range(0, size): 
+        for j in range(i+1, size): 
+            if arr[i]<=arr[j]: 
+                break
+        if j == size-1: # If loop didn't break 
+            print arr[i], 
+  
+# Driver function 
+arr=[16, 17, 4, 3, 5, 2] 
+printLeaders(arr, len(arr)) 
+  
+
+From <https://www.geeksforgeeks.org/leaders-in-an-array/> 
+
+
+
+8. Given an array and a number k where k is smaller than size of array, we need to find the k’th smallest element in the given array. It is given that ll array elements are distinct.
+Input: arr[] = {7, 10, 4, 3, 20, 15} k = 3 Output: 7 Input: arr[] = {7, 10, 4, 3, 20, 15} k = 4 Output: 10
+
+A Simple Solution is to sort the given array using a O(nlogn) sorting algorithm like Merge Sort, Heap Sort, etc and return the element at index k-1 in the sorted array. Time Complexity of this solution is O(nLogn). 
+ 
+
+def kthSmallest(arr, n, k): 
+  
+    # Sort the given array  
+    arr.sort() 
+  
+    # Return k'th element in the  
+    # sorted array  
+    return arr[k-1] 
+  
+# Driver code 
+if __name__=='__main__': 
+    arr = [12, 3, 5, 7, 19] 
+    n = len(arr) 
+    k = 2
+    print("K'th smallest element is", 
+          kthSmallest(arr, n, k)) 
+
+From <https://www.geeksforgeeks.org/kth-smallestlargest-element-unsorted-array/> 
+
+            
+9. Given a 2D array, print it in spiral form. See the following examples.
+Examples:
+Input:
+        1    2   3   4
+        5    6   7   8
+        9   10  11  12
+        13  14  15  16
+Output:
+1 2 3 4 8 12 16 15 14 13 9 5 6 7 11 10
+ Input:
+        1   2   3   4  5   6
+        7   8   9  10  11  12
+        13  14  15 16  17  18
+Output:
+1 2 3 4 5 6 12 18 17 16 15 14 13 7 8 9 10 11
+def spiralPrint(m, n, a) : 
+    k = 0; l = 0
+     ''' k - starting row index 
+        m - ending row index 
+        l - starting column index 
+        n - ending column index 
+        i - iterator '''
+    while (k < m and l < n) : 
+          
+        # Print the first row from 
+        # the remaining rows  
+      
+  for i in range(l, n) : 
+            print(a[k][i], end = " ") 
+         k += 1
+  
+        # Print the last column from 
+        # the remaining columns  
+      
+  for i in range(k, m) : 
+            print(a[i][n - 1], end = " ") 
+           n -= 1
+  
+        # Print the last row from 
+        # the remaining rows  
+       
+ if ( k < m) : 
+              
+            for i in range(n - 1, (l - 1), -1) : 
+                print(a[m - 1][i], end = " ") 
+              
+            m -= 1
+          
+        # Print the first column from 
+        # the remaining columns  
+       
+ if (l < n) : 
+            for i in range(m - 1, k - 1, -1) : 
+                print(a[i][l], end = " ")           
+            l += 1
+  # Driver Code 
+a = [ [1, 2, 3, 4, 5, 6], 
+      [7, 8, 9, 10, 11, 12], 
+      [13, 14, 15, 16, 17, 18] ] 
+        
+R = 3; C = 6
+spiralPrint(R, C, a) 
+
+From <https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/> 
+
+Time Complexity: Time complexity of the above solution is O(mn). 
+ 
+10. Print the elements of an array in the decreasing frequency if 2 numbers have same frequency then print the one which came first.
+ 
+Examples:
+ Input:  arr[] = {2, 5, 2, 8, 5, 6, 8, 8}
+Output: arr[] = {8, 8, 8, 2, 2, 5, 5, 6}
+ 
+Input: arr[] = {2, 5, 2, 6, -1, 9999999, 5, 8, 8, 8}
+Output: arr[] = {8, 8, 8, 2, 2, 5, 5, 6, -1, 9999999}
+1) Use a sorting algorithm to sort the elements O(nlogn) 
+2) Scan the sorted array and construct a 2D array of element and count O(n). 
+3) Sort the 2D array according to count O(nlogn).
+
+array.reduce((sorted, el) => {
+  let index = 0;
+  while(index < array.length && el < array[index]) index++;
+  sorted.splice(index, 0, el);
+  return sorted;
+}, []);
+ 
+
+function sortFunction(a, b) {
+    if (a[0] === b[0]) {
+        return 0;
+    }
+    else {
+        return (a[0] < b[0]) ? -1 : 1;
+    }
+}
+ 
+
+If you want to sort by the second column, you can do this:
+a.sort(compareSecondColumn);
+function compareSecondColumn(a, b) {
+    if (a[1] === b[1]) {
+        return 0;
+    }
+    else {
+        return (a[1] < b[1]) ? -1 : 1;
+    }
+}
